@@ -14,8 +14,4 @@ class ApplicationController < ActionController::Base
       format.any  { head :not_found }
     end
   end
-
-  def authenticate_access_token!
-    head :unauthorized if !(AccessToken.valid_token params[:token])
-  end
 end

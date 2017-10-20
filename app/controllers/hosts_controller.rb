@@ -1,6 +1,6 @@
-class HostsController < ApplicationController
-  before_filter :authenticate_access_token!
+class HostsController < ActionController::Base
   def create
+    head :unauthorized if !(AccessToken.valid_token params[:token])
     users_email_list = params[:users_list].split(',')
 
     users_email_list.each do |user_email|
