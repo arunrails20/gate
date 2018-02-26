@@ -260,6 +260,11 @@ class User < ActiveRecord::Base
     user_response
   end
 
+  def self.get_passwd_uids_response uids
+    uids.each do |uid|
+      user_list << get_passwd_uid_response(uid)
+    end
+  end
 
   def self.get_passwd_uid_response uid
     user = User.where(uid: uid).first

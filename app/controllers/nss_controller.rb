@@ -131,6 +131,14 @@ class NssController < ApplicationController
         end
       end
     end
+
+    host_machine = HostMachine.find_by(access_key: params[:token])
+    sysadmins = host_machine.sysadmins if host_machine.present?
+
+    if sysadmins.count > 0
+      @response = Users.get_passwd_uids_response(sysadmins).to_json
+    end
+
     render json: @response
   end
 
